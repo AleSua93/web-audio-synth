@@ -6,12 +6,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100%'
-    }}>
+    <div className='flex justify-center items-center h-full gap-2'>
       <Head>
         <title>Audio Playground</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

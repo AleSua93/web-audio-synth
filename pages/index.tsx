@@ -1,11 +1,13 @@
 import type { NextPage } from 'next'
-import AudioPlayer from '../components/audio-player'
+import NormalAudio from '../components/normal-audio'
+import Reverb from '../components/reverb'
 import Layout from '../components/layout'
 
 const Home: NextPage = () => {
   return (
     <Layout>
-      <AudioPlayer />
+      <NormalAudio />
+      <Reverb />
     </Layout>
   )
 }
