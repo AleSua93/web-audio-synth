@@ -1,9 +1,19 @@
-import { useCallback, useRef } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import useAudio from "../hooks/useAudio"
 
 const ReverbAudio = () => {
   const audioElement = useRef<HTMLAudioElement>(null)
-  useAudio(audioElement)
+  const [gainNode, setGainNode] = useState<GainNode>()
+  const { audioContext, audioSourceNode } = useAudio(audioElement)
+
+  useEffect(() => {
+    if (audioSourceNode && audioContext) {
+      const gainNode = audioContext.createGain()
+      audioSourceNode.connect(gainNode).connect(audioContext.destination)
+
+      setGainNode(gainNode)
+    }
+  }, [audioContext, audioSourceNode])
 
   const play = useCallback(
     () => {      
@@ -17,6 +27,15 @@ const ReverbAudio = () => {
       audioElement.current && audioElement.current.pause()
     },
     [audioElement],
+  )
+
+  const setVolume = useCallback(
+    (ev: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(ev.target.value);
+      
+      if (gainNode) gainNode.gain.value = Number(ev.target.value)
+    },
+    [gainNode],
   )
 
   return (
@@ -33,6 +52,14 @@ const ReverbAudio = () => {
         className="btn btn-green"
         onClick={pause}
       >Pause</button>
+      <input
+        type="range"
+        min="0"
+        max="2"
+        defaultValue={0.5}
+        step="0.01"
+        onChange={setVolume}
+      ></input>
     </div>
   )
 }

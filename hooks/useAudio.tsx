@@ -1,4 +1,4 @@
-import { MutableRefObject, RefObject, useEffect, useRef, useState } from "react"
+import { RefObject, useEffect, useState } from "react"
 
 interface AudioObjects {
   audioContext?: AudioContext
@@ -14,11 +14,9 @@ const useAudio = (audioElementRef: RefObject<HTMLMediaElement>):
     const context = new AudioContext()
 
     if (audioElementRef?.current) {
-      const track = context.createMediaElementSource(audioElementRef.current)
+      const sourceNode = context.createMediaElementSource(audioElementRef.current)
 
-      track.connect(context.destination)
-
-      setAudioSourceNode(track)
+      setAudioSourceNode(sourceNode)
     }
 
     setAudioContext(context)
