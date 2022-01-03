@@ -6,13 +6,15 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className='flex justify-center items-center h-full gap-2'>
-      <Head>
-        <title>Audio Playground</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      {children}
-    </div>
+    <div className='flex h-full justify-center items-center'>
+      <div className='grid grid-cols-3 gap-4 m-4 w-2/3'>
+        <Head>
+          <title>Audio Playground</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        {children}
+      </div>
+    </div>    
   )
 }
 

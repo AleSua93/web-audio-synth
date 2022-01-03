@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react"
 import useAudio from "../hooks/useAudio"
 
-const Reverb = () => {
+const ReverbAudio = () => {
   const audioElement = useRef<HTMLAudioElement>(null)
   useAudio(audioElement)
 
@@ -20,13 +20,21 @@ const Reverb = () => {
   )
 
   return (
-    <>
+    <div className="flex flex-col gap-3 text-center border border-black p-4">
       <audio ref={audioElement} src="test_audio.wav" />
-      <div>Audio with reverb</div>
-      <button type="button" onClick={play}>Play</button>
-      <button type="button" onClick={pause}>Pause</button>
-    </>
+      <h1 className="text-xl">Audio with reverb</h1>
+      <button
+        type="button"
+        className="btn btn-blue"
+        onClick={play}
+      >Play</button>
+      <button
+        type="button"
+        className="btn btn-green"
+        onClick={pause}
+      >Pause</button>
+    </div>
   )
 }
 
-export default Reverb;
+export default ReverbAudio;
