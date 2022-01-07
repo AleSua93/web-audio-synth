@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
+import Oscillator from "../helpers/oscillator"
 
 interface PianoKeyProps {
   audioContext: AudioContext
@@ -7,35 +8,18 @@ interface PianoKeyProps {
 }
 
 const PianoKey = ({ audioContext, frequency, note }: PianoKeyProps) => {
-  const [oscillator, setOscillator] = useState<OscillatorNode>()
-  const [gainNode, setGainNode] = useState<GainNode>()
+  const [oscillator, setOscillator] = useState(new Oscillator(audioContext, frequency))
 
   const play = useCallback(
     () => {
-      const oscillator = audioContext.createOscillator()
-      const gainNode = audioContext.createGain();
-
-      oscillator.type = 'sine'
-      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime)
-
-      oscillator.connect(gainNode).connect(audioContext.destination)
-
-      gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 1);
-      oscillator.start()
-
-      setOscillator(oscillator)
-      setGainNode(gainNode)
-
-      return () => {
-        oscillator.stop()
-      }
+      oscillator.play()
     },
     [oscillator],
   )
 
   const stop = useCallback(
     () => {
-      oscillator?.stop()
+      oscillator.stop()
     },
     [oscillator],
   )
