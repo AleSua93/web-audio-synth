@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import Oscillator from "../helpers/oscillator"
+import Note from "../models/note"
+import Oscillator from "../models/oscillator"
 
 interface PianoKeyProps {
   audioContext: AudioContext
-  frequency: number
-  note: string
+  note: Note
 }
 
-const PianoKey = ({ audioContext, frequency, note }: PianoKeyProps) => {
-  const [oscillator, setOscillator] = useState(new Oscillator(audioContext, frequency))
+const PianoKey = ({ audioContext, note }: PianoKeyProps) => {
+  const [oscillator, _setOscillator] = useState(new Oscillator(audioContext, note.frequency))
 
   const play = useCallback(
     () => {
@@ -27,11 +27,23 @@ const PianoKey = ({ audioContext, frequency, note }: PianoKeyProps) => {
   return (
     <button
       type="button"
-      className="flex rounded-sm border-2 border-gray-600 bg-zinc-100 h-32 w-10 items-end justify-center hover:bg-red-300"
+      className={`
+        flex
+        items-end
+        justify-center
+        h-48
+        w-full
+        rounded-sm
+        border-2
+        border-gray-600
+        ${note.keyType === 'black' ? 'bg-black' : 'bg-zinc-100' }
+        ${note.keyType === 'black' ? 'text-white' : '' }
+        hover:bg-red-400
+      `}
       onMouseEnter={play}
       onMouseLeave={stop}
     >
-      <span className="font-bold">{note}</span>
+      <span className="font-bold">{note.name}</span>
     </button>
   )
 }

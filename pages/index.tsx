@@ -10,7 +10,10 @@ const PianoRollWithNoSSR = dynamic(
 const Home: NextPage = () => {
   return (
     <Layout>
-      <PianoRollWithNoSSR />
+      <div className="flex flex-col flex-grow justify-between">
+        <div className='bg-gray-200 h-full'>01</div>
+        <PianoRollWithNoSSR />
+      </div>
     </Layout>
   )
 }

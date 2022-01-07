@@ -1,6 +1,6 @@
 export default class Oscillator {
-  initialGain: number = 1
-  delta: number = 0.01 // In seconds
+  initialGain: number = 0.75
+  delta: number = 0.001 // In seconds
 
   oscillatorNode: OscillatorNode
   gainNode: GainNode
