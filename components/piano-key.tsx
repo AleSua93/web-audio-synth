@@ -1,28 +1,32 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { KeyboardEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react"
 import Note from "../models/note"
 import Oscillator from "../models/oscillator"
 
 interface PianoKeyProps {
   audioContext: AudioContext
   note: Note
+  keyPressedEvent?: KeyboardEvent
 }
 
-const PianoKey = ({ audioContext, note }: PianoKeyProps) => {
+const PianoKey = ({ audioContext, note, keyPressedEvent }: PianoKeyProps) => {
   const [oscillator, _setOscillator] = useState(new Oscillator(audioContext, note.frequency))
+  const [isPressed, setIsPressed] = useState<boolean>()
 
-  const play = useCallback(
-    () => {
+  useEffect(() => {
+    if (isPressed) {
       oscillator.play()
-    },
-    [oscillator],
-  )
-
-  const stop = useCallback(
-    () => {
+    } else if (isPressed === false) {
       oscillator.stop()
-    },
-    [oscillator],
-  )
+    }
+  }, [isPressed])
+
+  useEffect(() => {
+    if (keyPressedEvent?.code === note.keyCode && !isPressed) {
+      setIsPressed(true)
+    }
+
+    if (keyPressedEvent?.code === note.keyCode && isPressed) setIsPressed(false)
+  }, [keyPressedEvent])
 
   return (
     <button
@@ -38,10 +42,8 @@ const PianoKey = ({ audioContext, note }: PianoKeyProps) => {
         border-gray-600
         ${note.keyType === 'black' ? 'bg-black' : 'bg-zinc-100' }
         ${note.keyType === 'black' ? 'text-white' : '' }
-        hover:bg-red-400
+        ${isPressed ? 'bg-red-400' : '' }
       `}
-      onMouseEnter={play}
-      onMouseLeave={stop}
     >
       <span className="font-bold">{note.name}</span>
     </button>
