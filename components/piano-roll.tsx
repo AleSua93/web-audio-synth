@@ -8,7 +8,7 @@ const PianoRoll = () => {
   const [pressedEvent, setPressedEvent] = useState<KeyboardEvent>()
 
   return (
-    <div className="flex w-full" onKeyDown={setPressedEvent} onKeyUp={setPressedEvent}>
+    <div className="flex w-full" tabIndex={0} onKeyDown={setPressedEvent} onKeyUp={setPressedEvent}>
       {Notes.map((n: Note) => {
         return (
           <PianoKey

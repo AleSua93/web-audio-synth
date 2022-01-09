@@ -21,11 +21,31 @@ const PianoKey = ({ audioContext, note, keyPressedEvent }: PianoKeyProps) => {
   }, [isPressed])
 
   useEffect(() => {
-    if (keyPressedEvent?.code === note.keyCode && !isPressed) {
+    // The osc plays if the key was just pressed for the first time
+    if (
+      keyPressedEvent?.type === 'keydown' &&
+      keyPressedEvent?.code === note.keyCode &&
+      !isPressed
+    ) {
       setIsPressed(true)
     }
 
-    if (keyPressedEvent?.code === note.keyCode && isPressed) setIsPressed(false)
+    // The osc stops if it was playing and the key was up
+    if (
+      keyPressedEvent?.type === 'keyup' &&
+      keyPressedEvent?.code === note.keyCode
+    ) {
+      setIsPressed(false)
+    }
+
+    // Or if another key was down (mono synth behavior)
+    if (
+      keyPressedEvent?.type === 'keydown' &&
+      keyPressedEvent?.code !== note.keyCode &&
+      isPressed
+    ) {
+      setIsPressed(false)
+    }
   }, [keyPressedEvent])
 
   return (
