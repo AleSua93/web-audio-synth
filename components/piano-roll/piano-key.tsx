@@ -1,16 +1,22 @@
 import React, { KeyboardEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react"
-import Note from "../models/note"
-import Oscillator from "../models/oscillator"
+import AudioSettings from "../../models/audio-settings"
+import Note from "../../models/note"
+import Oscillator from "../../models/oscillator"
 
 interface PianoKeyProps {
   audioContext: AudioContext
   note: Note
+  audioSettings: AudioSettings
   keyPressedEvent?: KeyboardEvent
 }
 
-const PianoKey = ({ audioContext, note, keyPressedEvent }: PianoKeyProps) => {
+const PianoKey = ({ audioContext, note, keyPressedEvent, audioSettings }: PianoKeyProps) => {
   const [oscillator, _setOscillator] = useState(new Oscillator(audioContext, note.frequency))
   const [isPressed, setIsPressed] = useState<boolean>()
+
+  useEffect(() => {
+    oscillator.setAudioSettings(audioSettings)
+  }, [audioSettings])
 
   useEffect(() => {
     if (isPressed) {

@@ -1,6 +1,9 @@
+import AudioSettings from "./audio-settings"
+
 export default class Oscillator {
-  initialGain: number = 0.75
+  initialGain: number = 0.5
   delta: number = 0.02 // In seconds
+  waveType: OscillatorType = 'sine'
 
   oscillatorNode: OscillatorNode
   gainNode: GainNode
@@ -17,7 +20,7 @@ export default class Oscillator {
 
   play() {
     this.oscillatorNode = this.audioContext.createOscillator()
-    this.oscillatorNode.type = 'sine'
+    this.oscillatorNode.type = this.waveType
     this.oscillatorNode.frequency.setValueAtTime(this.frequency, this.audioContext.currentTime)
 
     this.oscillatorNode.connect(this.gainNode).connect(this.audioContext.destination)    
@@ -41,5 +44,9 @@ export default class Oscillator {
     setTimeout(() => {
       this.oscillatorNode.stop();
     }, this.delta * 1000)
+  }
+
+  setAudioSettings(settings: AudioSettings) {
+    this.waveType = settings.waveType
   }
 }
