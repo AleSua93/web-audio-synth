@@ -8,8 +8,8 @@ interface WaveSelectorProps {
 
 const WaveSelector = ({ waveType, onWaveTypeChanged }: WaveSelectorProps) => {
   return (
-    <div className="flex flex-col">
-      <h2 className="text-xl">Wave type</h2>
+    <div className="flex flex-col text-center gap-1">
+      <h2 className="text-xl font-bold text-gray-700 mb-4">Wave type</h2>
       <WaveRadioButton
         id="sine"
         name="wave-radio"

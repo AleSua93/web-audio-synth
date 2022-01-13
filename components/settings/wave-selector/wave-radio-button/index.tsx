@@ -10,17 +10,23 @@ interface WaveRadioButtonProps {
 }
 
 const WaveRadioButton = (props: WaveRadioButtonProps) => {
+  const isChecked = props.selectedWaveType === props.id
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 w-full">
       <input
         id={props.id}
         name={props.name}
         type="radio"
         value={props.value}
-        checked={props.selectedWaveType === props.id}
+        checked={isChecked}
         onChange={props.onWaveTypeChanged}
+        className="hidden"
       />
-      <label htmlFor={props.id}>{props.label}</label>
+      <label
+        htmlFor={props.id}
+        className={`btn w-full text-center text-white ${isChecked ? 'btn-green' : 'btn-blue'}`}
+      >{props.label}</label>
     </div>
   )
 }
