@@ -26,11 +26,14 @@ const Home: NextPage = () => {
         onKeyUp={setPressedEvent}
       >
         <Settings settings={audioSettings} setSettings={setAudioSettings}/>
-        <PianoRollWithNoSSR
-          audioSettings={audioSettings}
-          pressedEvent={pressedEvent}
-        />
-      </div>
+        <div>
+          <div className='p-4 bg-yellow-900 border-2 border-y border-gray-800'/>
+          <PianoRollWithNoSSR
+            audioSettings={audioSettings}
+            pressedEvent={pressedEvent}
+          />
+          </div>
+        </div>
     </Layout>
   )
 }

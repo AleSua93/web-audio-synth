@@ -25,13 +25,13 @@ a {
 }
 
 .btn {
-  @apply font-bold py-2 px-4 rounded border cursor-pointer;
+  @apply py-2 px-4 border-y cursor-pointer;
 }
 
-.btn-blue {
-  @apply bg-blue-500 hover:bg-blue-700 text-white
+.btn-black {
+  @apply bg-black hover:bg-gray-700 text-white
 }
 
-.btn-green {
-  @apply bg-green-500 hover:bg-green-700 text-white
+.btn-white {
+  @apply bg-white text-black
 }

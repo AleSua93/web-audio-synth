@@ -25,7 +25,7 @@ const WaveRadioButton = (props: WaveRadioButtonProps) => {
       />
       <label
         htmlFor={props.id}
-        className={`btn w-full text-center text-white ${isChecked ? 'btn-green' : 'btn-blue'}`}
+        className={`btn w-full text-center text-white ${isChecked ? 'btn-white' : 'btn-black'}`}
       >{props.label}</label>
     </div>
   )

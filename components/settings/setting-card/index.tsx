@@ -1,10 +1,12 @@
 interface SettingCardProps {
   children: React.ReactNode
+  styles?: string
 }
 
-const SettingCard = ({ children }: SettingCardProps) => {
+const SettingCard = ({ children, styles }: SettingCardProps) => {
+
   return (
-    <div className="bg-gray-200 border-2 border-gray-700 p-2 rounded">
+    <div className={`${styles} border-gray-200 p-6 text-white`}>
       {children}
     </div>
   )

@@ -63,9 +63,6 @@ const PianoKey = ({ audioContext, note, keyPressedEvent, audioSettings }: PianoK
         justify-center
         h-48
         w-full
-        rounded-sm
-        border-2
-        border-gray-600
         ${note.keyType === 'black' ? 'bg-black' : 'bg-zinc-100' }
         ${note.keyType === 'black' ? 'text-white' : '' }
         ${isPressed ? 'bg-red-400' : '' }

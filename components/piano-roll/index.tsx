@@ -13,7 +13,7 @@ const PianoRoll = ({ audioSettings, pressedEvent }: PianoRollProps) => {
   const [audioContext, _setAudioContext] = useState(new AudioContext())
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full divide-x divide-black">
       {Notes.map((n: Note) => {
         return (
           <PianoKey
