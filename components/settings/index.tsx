@@ -17,7 +17,7 @@ const Settings = ({ settings, setSettings }: SettingsProps) => {
   }
 
   return (
-    <div className='grid grid-cols-4 grid-rows-2 gap-4 h-full p-2 bg-gray-800'>
+    <div className='grid grid-cols-4 gap-4 h-full p-2 bg-gray-800'>
       <SettingCard>
         <WaveSelector waveType={settings.waveType} onWaveTypeChanged={onWaveTypeChanged}/>
       </SettingCard>

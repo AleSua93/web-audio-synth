@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useEffect, useState } from "react"
+import React, { KeyboardEvent, useState } from "react"
 import Notes from "../../constants/notes";
 import AudioSettings from "../../models/audio-settings";
 import Note from "../../models/note";
@@ -6,19 +6,14 @@ import PianoKey from "./piano-key";
 
 interface PianoRollProps {
   audioSettings: AudioSettings
+  pressedEvent?: KeyboardEvent
 }
 
-const PianoRoll = ({ audioSettings }: PianoRollProps) => {
+const PianoRoll = ({ audioSettings, pressedEvent }: PianoRollProps) => {
   const [audioContext, _setAudioContext] = useState(new AudioContext())
-  const [pressedEvent, setPressedEvent] = useState<KeyboardEvent>()
 
   return (
-    <div
-      className="flex w-full"
-      tabIndex={0}
-      onKeyDown={setPressedEvent}
-      onKeyUp={setPressedEvent}
-    >
+    <div className="flex w-full">
       {Notes.map((n: Note) => {
         return (
           <PianoKey

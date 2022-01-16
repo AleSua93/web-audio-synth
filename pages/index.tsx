@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { KeyboardEvent } from 'react'
 import Layout from '../components/layout'
 import dynamic from 'next/dynamic'
 import Settings from '../components/settings'
@@ -14,12 +15,21 @@ const Home: NextPage = () => {
   const [audioSettings, setAudioSettings] = useState<AudioSettings>({
     waveType: 'sine'
   })
+  const [pressedEvent, setPressedEvent] = useState<KeyboardEvent>()
 
   return (
     <Layout>
-      <div className="flex flex-col flex-grow justify-between">
+      <div
+        className="flex flex-col flex-grow justify-between"
+        tabIndex={0}
+        onKeyDown={setPressedEvent}
+        onKeyUp={setPressedEvent}
+      >
         <Settings settings={audioSettings} setSettings={setAudioSettings}/>
-        <PianoRollWithNoSSR audioSettings={audioSettings}/>
+        <PianoRollWithNoSSR
+          audioSettings={audioSettings}
+          pressedEvent={pressedEvent}
+        />
       </div>
     </Layout>
   )
