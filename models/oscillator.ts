@@ -23,7 +23,7 @@ export default class Oscillator {
     this.oscillatorNode.type = this.waveType
     this.oscillatorNode.frequency.setValueAtTime(this.frequency, this.audioContext.currentTime)
 
-    this.oscillatorNode.connect(this.gainNode).connect(this.audioContext.destination)    
+    this.oscillatorNode.connect(this.gainNode).connect(this.audioContext.destination)  
 
     this.gainNode.gain.setValueAtTime(0.0001, this.audioContext.currentTime);
     this.gainNode.gain.exponentialRampToValueAtTime(1, this.audioContext.currentTime + this.delta);

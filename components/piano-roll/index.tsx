@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useState } from "react"
+import React, { KeyboardEvent, useState } from "react";
 import Notes from "../../constants/notes";
 import AudioSettings from "../../models/audio-settings";
 import Note from "../../models/note";

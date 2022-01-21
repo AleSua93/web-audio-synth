@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, SyntheticEvent, useCallback, useEffect, useRef, useState } from "react"
+import React, { KeyboardEvent, useEffect, useState } from "react"
 import AudioSettings from "../../models/audio-settings"
 import Note from "../../models/note"
 import Oscillator from "../../models/oscillator"

@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react"
 import AudioSettings from "../../models/audio-settings";
+import LpfSlider from "./lpf-slider";
 import SettingCard from "./setting-card";
 import WaveSelector from "./wave-selector";
 
@@ -16,13 +17,20 @@ const Settings = ({ settings, setSettings }: SettingsProps) => {
     })
   }
 
+  const onLpfCutoffChanged = (ev: ChangeEvent<HTMLInputElement>) => {
+    setSettings({
+      ...settings,
+      lpfCutoff: parseInt(ev.target.value)
+    })
+  }
+
   return (
     <div className='flex divide-x gap-4 p-4'>
       <SettingCard>
         <WaveSelector waveType={settings.waveType} onWaveTypeChanged={onWaveTypeChanged}/>
       </SettingCard>
       <SettingCard>
-        LPF
+        <LpfSlider cutoff={settings.lpfCutoff} onCutoffChanged={onLpfCutoffChanged} />
       </SettingCard>
     </div>
   )
