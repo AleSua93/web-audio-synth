@@ -2,16 +2,19 @@ import React, { KeyboardEvent, useEffect, useState } from "react"
 import AudioSettings from "../../models/audio-settings"
 import Note from "../../models/note"
 import Oscillator from "../../models/oscillator"
+import OscillatorManager from "../../models/oscillator-manager"
 
 interface PianoKeyProps {
-  audioContext: AudioContext
+  oscillatorManager: OscillatorManager
   note: Note
   audioSettings: AudioSettings
   keyPressedEvent?: KeyboardEvent
 }
 
-const PianoKey = ({ audioContext, note, keyPressedEvent, audioSettings }: PianoKeyProps) => {
-  const [oscillator, _setOscillator] = useState(new Oscillator(audioContext, note.frequency))
+const PianoKey = ({ oscillatorManager, note, keyPressedEvent, audioSettings }: PianoKeyProps) => {
+  const [oscillator] = useState<Oscillator>(
+    oscillatorManager.createOscillator(note.name, note.frequency)
+  )
   const [isPressed, setIsPressed] = useState<boolean>()
 
   useEffect(() => {

@@ -1,7 +1,8 @@
-import React, { KeyboardEvent, useState } from "react";
+import React, { KeyboardEvent, useEffect, useState } from "react";
 import Notes from "../../constants/notes";
 import AudioSettings from "../../models/audio-settings";
 import Note from "../../models/note";
+import OscillatorManager from "../../models/oscillator-manager";
 import PianoKey from "./piano-key";
 
 interface PianoRollProps {
@@ -10,14 +11,20 @@ interface PianoRollProps {
 }
 
 const PianoRoll = ({ audioSettings, pressedEvent }: PianoRollProps) => {
-  const [audioContext, _setAudioContext] = useState(new AudioContext())
+  const [oscillatorManager] = 
+    useState<OscillatorManager>(new OscillatorManager(new AudioContext()))
+
+  useEffect(() => {
+    oscillatorManager.setLpfCutoff(audioSettings.lpfCutoff)
+  }, [audioSettings]);
+  
 
   return (
     <div className="flex w-full divide-x divide-black">
       {Notes.map((n: Note) => {
         return (
           <PianoKey
-            audioContext={audioContext}
+            oscillatorManager={oscillatorManager}
             key={n.name}
             note={n}
             keyPressedEvent={pressedEvent}
