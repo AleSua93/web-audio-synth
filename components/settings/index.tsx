@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react"
 import AudioSettings from "../../models/audio-settings";
+import GainSlider from "./gain-slider";
 import LpfSlider from "./lpf-slider";
 import SettingCard from "./setting-card";
 import WaveSelector from "./wave-selector";
@@ -24,6 +25,13 @@ const Settings = ({ settings, setSettings }: SettingsProps) => {
     })
   }
 
+  const onGlobalGainChanged = (ev: ChangeEvent<HTMLInputElement>) => {
+    setSettings({
+      ...settings,
+      globalGain: parseFloat(ev.target.value)
+    })
+  }
+
   return (
     <div className='flex divide-x gap-4 p-4'>
       <SettingCard>
@@ -31,6 +39,9 @@ const Settings = ({ settings, setSettings }: SettingsProps) => {
       </SettingCard>
       <SettingCard>
         <LpfSlider cutoff={settings.lpfCutoff} onCutoffChanged={onLpfCutoffChanged} />
+      </SettingCard>
+      <SettingCard>
+        <GainSlider gain={settings.globalGain} onGainChanged={onGlobalGainChanged} />
       </SettingCard>
     </div>
   )

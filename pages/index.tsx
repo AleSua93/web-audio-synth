@@ -14,7 +14,8 @@ const PianoRollWithNoSSR = dynamic(
 const Home: NextPage = () => {
   const [audioSettings, setAudioSettings] = useState<AudioSettings>({
     waveType: 'sine',
-    lpfCutoff: 200
+    lpfCutoff: 200,
+    globalGain: 0.001
   })
   const [pressedEvent, setPressedEvent] = useState<KeyboardEvent>()
 
